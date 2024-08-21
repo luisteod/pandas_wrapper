@@ -26,9 +26,9 @@ class PandasPG:
         )
         return conn
 
-    def read_sql(self, query):
+    def read_sql(self, query, col_types: dict = None):
         with self.__get_alchemy_conn() as conn:
-            return pd.read_sql(query, conn)
+            return pd.read_sql(query, conn, dtype=col_types)
 
     def to_sql(self, df, table_name, schema, if_exists="fail"):
         """

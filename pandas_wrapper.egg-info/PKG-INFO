@@ -1,6 +1,0 @@
-Metadata-Version: 2.1
-Name: pandas_wrapper
-Version: 0.1
-Author: Luis Henrique
-Requires-Dist: pandas==2.2.2
-Requires-Dist: psycopg2-binary==2.9.9
