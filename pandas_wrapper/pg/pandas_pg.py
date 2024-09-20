@@ -3,7 +3,6 @@ import pandas as pd
 import psycopg2
 from psycopg2 import sql
 
-
 class PandasPG:
     def __init__(self, host, port, db, user, pwd):
         self.__host = host
@@ -12,7 +11,7 @@ class PandasPG:
         self.__user = user
         self.__pwd = pwd
 
-        with self.__get_alchemy_conn() as conn:
+        with self.__get_psyco_conn() as conn:
             pass
 
     def __get_alchemy_conn(self):
