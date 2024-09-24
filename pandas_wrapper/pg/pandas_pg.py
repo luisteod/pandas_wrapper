@@ -1,7 +1,9 @@
 from sqlalchemy import create_engine
 import pandas as pd
 import psycopg2
-from psycopg2 import sql
+import logging
+# Configure the logging system
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class PandasPG:
     def __init__(self, host, port, db, user, pwd):
@@ -12,7 +14,7 @@ class PandasPG:
         self.__pwd = pwd
 
         with self.__get_psyco_conn() as conn:
-            pass
+            logging.info("Connection to PostgreSQL established successfully")
 
     def __get_alchemy_conn(self):
         conn_string = f"postgresql+psycopg2://{self.__user}:{self.__pwd}@{self.__host}:{self.__port}/{self.__db}"
@@ -37,23 +39,19 @@ class PandasPG:
             cursor = conn.cursor()
 
             # Execute the query
-            try:
-                cursor.execute(query)
-                # Fetch all rows from the executed query
-                rows = cursor.fetchall()
-                # Fetch column names
-                colnames = [desc[0] for desc in cursor.description]
+           
+            cursor.execute(query)
+            # Fetch all rows from the executed query
+            rows = cursor.fetchall()
+            # Fetch column names
+            colnames = [desc[0] for desc in cursor.description]
 
-                # Convert to a DataFrame
-                df = pd.DataFrame(rows, columns=colnames)
+            # Convert to a DataFrame
+            df = pd.DataFrame(rows, columns=colnames)
 
-                print("Query executed and DataFrame created successfully")
+            logging.info("Query executed and DataFrame created successfully")
 
-                return df
-
-            except Exception as e:
-                print(f"Error: {e}")
-                return False
+            return df
 
     def read_sql_alchemy(self, query, col_types: dict = None):
         with self.__get_alchemy_conn() as conn:
