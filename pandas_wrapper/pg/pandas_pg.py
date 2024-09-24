@@ -63,14 +63,5 @@ class PandasPG:
             if_exists: {'fail', 'replace', 'append'}
         """
 
-        with self.__get_psyco_conn() as conn:
-            df.to_sql(table_name, conn, schema=schema, if_exists=if_exists, index=False)
-
-    def to_sql_alchemy(self, df, table_name, schema, if_exists="fail"):
-        """
-        Args:
-            if_exists: {'fail', 'replace', 'append'}
-        """
-
         with self.__get_alchemy_conn() as conn:
             df.to_sql(table_name, conn, schema=schema, if_exists=if_exists, index=False)
