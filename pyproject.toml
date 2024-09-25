@@ -11,9 +11,9 @@ authors = [
 description = "A simple python package that integrate pandas with other tools."
 requires-python = ">=3.10"
 dependencies = [
-    "pandas==2.2.2",
-    "psycopg2-binary==2.9.9",
-    "sqlalchemy==2.0.32",
+    "pandas>=2.0.0,<3",
+    "psycopg2-binary>=2.9.0,<3",
+    "sqlalchemy>=2.0.0,<3",
 ]
 
 [tool.hatch.build.targets.wheel]
